@@ -1,10 +1,11 @@
 {
   "name": "fast-vue-md-loader",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Simple and fast vue markdown loader",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "babel src --out-dir lib",
+    "release": "npm run build && npm publish"
   },
   "repository": {
     "type": "git",
@@ -19,5 +20,10 @@
   "dependencies": {
     "highlight.js": "^9.12.0",
     "markdown-it": "^8.4.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.6.1"
   }
 }

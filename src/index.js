@@ -23,7 +23,7 @@ module.exports = function(source, options) {
 
   options = {
     wrapper,
-    ...options;
+    ...options
   };
 
   return options.wrapper(parser.render(source));
