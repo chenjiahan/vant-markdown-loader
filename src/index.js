@@ -16,7 +16,10 @@ export default {
 `;
 
 const highlight = (str, lang) => lang && hljs.getLanguage(lang) ? hljs.highlight(lang, str, true).value : '';
-const parser = new MarkdownIt({ highlight });
+const parser = new MarkdownIt({
+  html: true,
+  highlight
+});
 
 module.exports = function(source, options) {
   this.cacheable && this.cacheable();
