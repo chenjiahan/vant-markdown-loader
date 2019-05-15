@@ -1,7 +1,12 @@
-const hljs = require('highlight.js');
 const MarkdownIt = require('markdown-it');
+const highlight = require('./highlight');
+const cardWrapper = require('./card-wrapper');
 
-const wrapper = content => `
+function wrapper(content) {
+  content = cardWrapper(content);
+  content = escape(content);
+
+  return `
 <template>
   <section v-html="content" v-once />
 </template>
@@ -9,13 +14,13 @@ const wrapper = content => `
 <script>
 export default {
   created() {
-    this.content = unescape(\`${escape(content)}\`);
+    this.content = unescape(\`${content}\`);
   }
 };
 </script>
 `;
+}
 
-const highlight = (str, lang) => lang && hljs.getLanguage(lang) ? hljs.highlight(lang, str, true).value : '';
 const parser = new MarkdownIt({
   html: true,
   highlight
@@ -30,4 +35,4 @@ module.exports = function(source, options) {
   };
 
   return options.wrapper(parser.render(source));
-}
+};

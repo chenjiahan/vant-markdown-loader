@@ -4,13 +4,13 @@ Simple and fast vue markdown loader, transform markdown to vue component.
 
 ## Install
 
-#### NPM
+### NPM
 
 ```shell
 npm i @vant/markdown-loader -S
 ```
 
-#### YARN
+### YARN
 
 ```shell
 yarn add @vant/markdown-loader
