@@ -17,6 +17,25 @@ function wrapper(content) {
 export default {
   created() {
     this.content = unescape(\`${content}\`);
+  },
+
+  mounted() {
+    const anchors = [].slice.call(this.$el.querySelectorAll('h2, h3, h4, h5'));
+
+    anchors.forEach(anchor => {
+      anchor.addEventListener('click', scrollToAnchor);
+    });
+  },
+
+  methods: {
+    scrollToAnchor(event) {
+      if (event.target.id) {
+        this.$router.push({
+          path: this.$route.path,
+          hash: event.target.id
+        })
+      }
+    }
   }
 };
 </script>
@@ -28,9 +47,7 @@ const parser = new MarkdownIt({
   highlight
 }).use(markdownItAnchor, {
   level: 2,
-  slugify,
-  permalink: true,
-  permalinkSymbol: '#'
+  slugify
 });
 
 module.exports = function(source, options) {
