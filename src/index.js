@@ -1,3 +1,4 @@
+const loaderUtils = require('loader-utils');
 const MarkdownIt = require('markdown-it');
 const markdownItAnchor = require('markdown-it-anchor');
 const highlight = require('./highlight');
@@ -50,7 +51,8 @@ const parser = new MarkdownIt({
   slugify
 });
 
-module.exports = function(source, options) {
+module.exports = function(source) {
+  let options = loaderUtils.getOptions(this) || {};
   this.cacheable && this.cacheable();
 
   options = {
