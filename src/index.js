@@ -1,6 +1,7 @@
 const loaderUtils = require('loader-utils');
 const MarkdownIt = require('markdown-it');
 const markdownItAnchor = require('markdown-it-anchor');
+const frontMatter = require('front-matter');
 const highlight = require('./highlight');
 const cardWrapper = require('./card-wrapper');
 const slugify = require('transliteration').slugify;
@@ -60,5 +61,7 @@ module.exports = function(source) {
     ...options
   };
 
-  return options.wrapper(parser.render(source));
+  const fm = frontMatter(source);
+
+  return options.wrapper(parser.render(fm.body), fm);
 };
