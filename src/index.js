@@ -61,7 +61,12 @@ module.exports = function(source) {
     ...options
   };
 
-  const fm = frontMatter(source);
+  let fm;
 
-  return options.wrapper(parser.render(fm.body), fm);
+  if (options.enableMetaData) {
+    fm = frontMatter(source);
+    source = fm.body;
+  }
+
+  return options.wrapper(parser.render(source), fm);
 };
